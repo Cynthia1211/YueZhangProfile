@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<title>Profile Management</title>
+</head>
+<body>
+	<header>
+
+	</header>
+	<main>
+		<section>
+			<h1>Personal Details</h1>
+			<table th:if="${currDetails != null}" border="1">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Address</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td th:text="${currDetails.name}"></td>
+						<td th:text="${currDetails.phone}"></td>
+						<td th:text="${currDetails.address}"></td>
+						<td th:text="${currDetails.email}"></td>
+					</tr>
+				</tbody>
+			</table><br>
+			<hr>
+
+			<form method="post" th:action="@{/updatePersonalDetails}" th:object="${personalDetails}">
+				<input type="hidden" th:field="*{id}"> 
+				Name: <input type="text" th:field="*{name}"> 
+				<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red;"></span><br> 
+				Phone: +1 <input type="text" th:field="*{phone}"> 
+				<span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" style="color: red;"></span><br> 
+				Address: <input type="text" th:field="*{address}"> 
+				<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color: red;"></span><br> 
+				Email: <input type="email" th:field="*{email}"> 
+				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></span><br> 
+				<input type="submit" value="Update!" />
+			</form>
+		</section>
+	
+	</main>
+</body>
+</html>
